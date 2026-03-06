@@ -4,7 +4,8 @@ import loginRouter from "./login.route.js";
 
 const authRouter = express.Router();
 
-// nested routes
+// all of these should use validation middleware, username exist etc.
+// below lead to nested routes
 authRouter.use('/register', registerRouter);
 authRouter.use('/login', loginRouter);
 

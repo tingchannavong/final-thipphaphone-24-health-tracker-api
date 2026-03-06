@@ -3,8 +3,8 @@ import {doctorRegisterController, userRegisterController} from "../controllers/a
 
 const registerRouter = express.Router();
 
+//final destination of nested route
 registerRouter.post('/doctor', doctorRegisterController);
-
 registerRouter.post('/user', userRegisterController);
 
 export default registerRouter;

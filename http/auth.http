@@ -5,13 +5,19 @@ POST {{BASE_URL}}/auth/register/doctor
 Content-Type: application/json
 
 {
-  "username": "salita",
-  "password": "kk",
-  "specialization": "psychiatrist"
+  "username": "coke",
+  "password": "bb",
+  "specialization": "obgyn"
 }
 
 ### user register
 POST {{BASE_URL}}/auth/register/user
+Content-Type: application/json
+
+{
+  "username": "hera",
+  "password": "cc"
+}
 
 ### doctor login
 POST {{BASE_URL}}/auth/login/doctor
@@ -21,3 +27,24 @@ Content-Type: application/json
   "username": "natp",
   "password": "doctor"
 }
+
+### user login
+POST {{BASE_URL}}/auth/login/user
+Content-Type: application/json
+
+{
+  "username": "ben",
+  "password": "cc"
+}
+
+### user get me
+GET {{BASE_URL}}/users/me
+Content-Type: application/json
+
+{
+  "username": "ben",
+  "password": "cc"
+}
+
+
+

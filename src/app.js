@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config"
 import authRouter from "./routes/auth.route.js";
 import errorHandler from "./middlewares/errorHandler.js";
+import userRouter from "./routes/user.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -13,6 +14,7 @@ app.get('/', (re, res) => {
 });
 
 app.use('/auth', authRouter);
+app.use('/users', userRouter);
 
 app.use(errorHandler);
 
