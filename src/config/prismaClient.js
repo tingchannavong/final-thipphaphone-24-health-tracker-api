@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "../generated/prisma/client.js";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import "dotenv/config";
 
@@ -9,8 +9,6 @@ const adapter = new PrismaMariaDb({
     database: process.env.DATABASE_NAME,
     connectionLimit: 5
 });
-
-console.log(adapter);
 
 const prisma = new PrismaClient({adapter});
 

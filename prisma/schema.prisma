@@ -14,17 +14,36 @@ datasource db {
 }
 
 model Doctor {
-  id Int @id
+  id             Int    @id @default(autoincrement())
+  username       String @unique
+  password       String
+  specialization String
+  notes DoctorNote[]
 }
 
 model User {
-  id Int @id
-}
-
-model HealthRecord {
-  id Int @id
+  id       Int            @id @default(autoincrement())
+  username String         @unique
+  password String
+  records  HealthRecord[]
+  notes DoctorNote[]
 }
 
 model DoctorNote {
-  id Int @id
+  id        Int      @id @default(autoincrement())
+  note      String
+  createdAt DateTime @default(now())
+  doctorId Int?
+  doctor Doctor? @relation(fields: [doctorId], references: [id])
+  userId Int?
+  user User? @relation(fields:[userId], references: [id])
+}
+
+model HealthRecord {
+  id     Int      @id @default(autoincrement())
+  type   String
+  value  String
+  date   DateTime @default(now())
+  user   User?    @relation(fields: [userId], references: [id])
+  userId Int?
 }
