@@ -1,9 +1,10 @@
-import { updateUser } from "../services/user.service.js";
+import { findUserById, updateUser } from "../services/user.service.js";
 
 export async function getMeController(re, res) {
-   const { id, username } = re.userData;
-    
-   // payload alrd have user info, so no need service
+   // get from database for real
+    const {id, username} = await findUserById(re.userData.id);
+   
+    // cant get from payload in case username gets changed midway
    res.status(200).json({
     id,
     username
@@ -17,6 +18,7 @@ export async function updateMeController(re, res, next) {
     try {
         // use prisma update service
         const result = await updateUser(id, username, password);
+        delete result.password;
         
         res.status(200).json({
             success: true,
@@ -26,5 +28,4 @@ export async function updateMeController(re, res, next) {
     } catch (error) {
         next(error);
     }
-
 }

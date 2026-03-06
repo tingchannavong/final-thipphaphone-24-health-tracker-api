@@ -1,5 +1,6 @@
 @BASE_URL = http://localhost:8888
 @USER_TOKEN = {{user_login.response.body.token}}
+@DOCTOR_TOKEN = {{doctor_login.response.body.token}}
 
 ### doctor register
 POST {{BASE_URL}}/auth/register/doctor
@@ -21,6 +22,7 @@ Content-Type: application/json
 }
 
 ### doctor login
+# @name doctor_login
 POST {{BASE_URL}}/auth/login/doctor
 Content-Type: application/json
 
@@ -39,17 +41,32 @@ Content-Type: application/json
   "password": "66"
 }
 
-### user get me
+###  get user me
 GET {{BASE_URL}}/users/me
 Content-Type: application/json
 Authorization: Bearer {{USER_TOKEN}}
 
-### user update me
+###  update user me
 PUT {{BASE_URL}}/users/me
 Authorization: Bearer {{USER_TOKEN}}
 Content-Type: application/json
 
 {
-  "username": "benji",
-  "password": "66"
+  "username": "bennie",
+  "password": "44"
+}
+
+### doctor get me
+GET {{BASE_URL}}/doctors/me
+Content-Type: application/json
+Authorization: Bearer {{DOCTOR_TOKEN}}
+
+### user update me
+PUT {{BASE_URL}}/users/me
+Authorization: Bearer {{DOCTOR_TOKEN}}
+Content-Type: application/json
+
+{
+  "username": "dr. nat",
+  "password": "gg"
 }

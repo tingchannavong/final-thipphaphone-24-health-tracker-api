@@ -26,5 +26,18 @@ export function authCheckUser(re, res, next) {
 }
 
 export function authCheckDoctor(re, res, next) {
+    const token = re.headers?.authorization.split(' ')[1];
+
+    if (!token) {
+        throw createError(401, "Unauthorized");
+    }
+
+    try {
+        const payload = verifyToken(token, process.env.JWT_SECRET_DOCTOR);
+        re.doctorData = payload;
+        next();
+    } catch (error) {
+        next(error);
+    }
     
 }
