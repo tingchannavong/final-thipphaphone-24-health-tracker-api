@@ -27,7 +27,7 @@ export async function registerDoctor(username, password, specialization) {
 }
 
 export async function registerUser(username, password) {
-    // check if doctor exist, if yes throw error
+    // check if user exist, if yes throw error
     const userExist = await findUserByUsername(username);
     if (userExist) {
         throw createError(400, 'username already exist')

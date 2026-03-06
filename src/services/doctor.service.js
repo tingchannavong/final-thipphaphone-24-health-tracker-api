@@ -7,3 +7,4 @@ export async function findDoctorByUsername(username) {
         });
     return doctor;
 }
+

@@ -1,4 +1,5 @@
 @BASE_URL = http://localhost:8888
+@USER_TOKEN = {{user_login.response.body.token}}
 
 ### doctor register
 POST {{BASE_URL}}/auth/register/doctor
@@ -29,22 +30,26 @@ Content-Type: application/json
 }
 
 ### user login
+# @name user_login
 POST {{BASE_URL}}/auth/login/user
 Content-Type: application/json
 
 {
-  "username": "ben",
-  "password": "cc"
+  "username": "benji",
+  "password": "66"
 }
 
 ### user get me
 GET {{BASE_URL}}/users/me
 Content-Type: application/json
+Authorization: Bearer {{USER_TOKEN}}
+
+### user update me
+PUT {{BASE_URL}}/users/me
+Authorization: Bearer {{USER_TOKEN}}
+Content-Type: application/json
 
 {
-  "username": "ben",
-  "password": "cc"
+  "username": "benji",
+  "password": "66"
 }
-
-
-

@@ -7,3 +7,10 @@ export function generateToken(payload, secret, time) {
     });
     return token;
 }
+
+export function verifyToken(token, secret) {
+    const decode = jwt.verify(token, secret, {
+        algorithms: ["HS256"]
+    });
+    return decode;
+}
