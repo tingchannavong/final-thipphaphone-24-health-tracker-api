@@ -37,8 +37,8 @@ POST {{BASE_URL}}/auth/login/user
 Content-Type: application/json
 
 {
-  "username": "benji",
-  "password": "66"
+  "username": "hera",
+  "password": "cc"
 }
 
 ###  get user me
@@ -52,8 +52,8 @@ Authorization: Bearer {{USER_TOKEN}}
 Content-Type: application/json
 
 {
-  "username": "bennie",
-  "password": "44"
+  "username": "hera2",
+  "password": "cc"
 }
 
 ### doctor get me
@@ -61,12 +61,13 @@ GET {{BASE_URL}}/doctors/me
 Content-Type: application/json
 Authorization: Bearer {{DOCTOR_TOKEN}}
 
-### user update me
-PUT {{BASE_URL}}/users/me
+### doctor update me
+PUT {{BASE_URL}}/doctors/me
 Authorization: Bearer {{DOCTOR_TOKEN}}
 Content-Type: application/json
 
 {
   "username": "dr. nat",
-  "password": "gg"
+  "password": "gg",
+  "specialization": "psychologist"
 }

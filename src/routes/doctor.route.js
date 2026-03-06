@@ -7,6 +7,6 @@ const doctorRouter = express.Router();
 // middleware for all routes below so far
 doctorRouter.use(authCheckDoctor);
 doctorRouter.get('/me', getDoctorController);
-doctorRouter.put('/me',  updateDoctorController);
+doctorRouter.put('/me', updateDoctorController);
 
 export default doctorRouter;

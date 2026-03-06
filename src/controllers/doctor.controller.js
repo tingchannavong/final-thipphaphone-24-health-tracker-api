@@ -14,11 +14,11 @@ export async function getDoctorController(re, res) {
 
 export async function updateDoctorController(re, res, next) {
   const { id } = re.doctorData;
-  const { username, password } = re.body;
+  const { username, password, specialization } = re.body;
 
   try {
-    // use prisma update service
-    const result = await updateDoctor(id, username, password);
+    const result = await updateDoctor(id, username, password, specialization);
+    delete result.password;
 
     res.status(200).json({
       success: true,

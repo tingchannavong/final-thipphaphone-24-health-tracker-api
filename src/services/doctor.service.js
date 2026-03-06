@@ -1,5 +1,6 @@
 import prisma from "../config/prismaClient.js";
 import bcrypt from "bcrypt";
+import createError from "http-errors"
 
 export async function findDoctorByUsername(username) {
     const doctor = await prisma.doctor.findUnique(
@@ -17,23 +18,17 @@ export async function findDoctorById(id) {
     return user;
 }
 
-export async function updateDoctor(id, {username, password, specialization}) {
-    // check if username exist, if yes throw error
-    const doctorExist = await findDoctorById(id);
-    if (doctorExist) {
-        throw createError(400, 'username already exist')
-    }
-
-    // hash password
+export async function updateDoctor(id, username, password, specialization) {
     const hashedPassword = await bcrypt.hash(password, 6);
 
-    const updatedUser = await prisma.user.update(
+    const updatedDoctor = await prisma.doctor.update(
         {
             where: {id},
             data: {
                 username,
-                password: hashedPassword
+                password: hashedPassword,
+                specialization
             }
         });
-    return updatedUser;
+    return updatedDoctor;
 }
