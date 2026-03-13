@@ -17,8 +17,8 @@ POST {{BASE_URL}}/auth/register/user
 Content-Type: application/json
 
 {
-  "username": "hera",
-  "password": "cc"
+  "username": "tingting",
+  "password": "555"
 }
 
 ### doctor login
@@ -37,8 +37,8 @@ POST {{BASE_URL}}/auth/login/user
 Content-Type: application/json
 
 {
-  "username": "hera",
-  "password": "cc"
+  "username": "tingting",
+  "password": "555"
 }
 
 ###  get user me
@@ -70,4 +70,14 @@ Content-Type: application/json
   "username": "dr. nat",
   "password": "gg",
   "specialization": "psychologist"
+}
+
+### create health record by user
+POST {{BASE_URL}}/health-records
+Authorization: Bearer {{USER_TOKEN}}
+Content-Type: application/json
+
+{
+  "type": "weight",
+  "value": "60kg"
 }
