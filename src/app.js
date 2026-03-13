@@ -4,6 +4,8 @@ import authRouter from "./routes/auth.route.js";
 import errorHandler from "./middlewares/errorHandler.js";
 import userRouter from "./routes/user.route.js";
 import doctorRouter from "./routes/doctor.route.js";
+import healthRouter from "./routes/healthRecord.route.js";
+import notesRouter from "./routes/doctorNote.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -17,6 +19,8 @@ app.get('/', (re, res) => {
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/doctors', doctorRouter);
+app.use('/health-records', healthRouter);
+app.use('/doctor-notes', notesRouter);
 
 app.use(errorHandler);
 
