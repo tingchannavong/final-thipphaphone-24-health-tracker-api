@@ -1,6 +1,7 @@
 import { findDoctorById } from "../services/doctor.service.js";
-import { createUserHealthRecord, getAllHealthRecord, getHealthRecordsBy, getHealthRecordsByDate } from "../services/healthRecord.service.js";
+import { createUserHealthRecord, deleteHealthRecordById, getAllHealthRecord, getHealthRecordsBy, getHealthRecordsByDate, getUniqueHealthRecordBy, updateHealthRecordsById } from "../services/healthRecord.service.js";
 import createError from "http-errors";
+import { findUserById } from "../services/user.service.js";
 
 export async function createHealthRecordController(re, res) {
     const {id} = re.userData;
@@ -21,7 +22,6 @@ export async function getHealthRecordController(re, res) {
     if (!doctorExist) {throw createError(400, 'invalid user id')}
 
     let records;
-
     const {type, from ,to} = re.query;
 
     // case query by both date and type
@@ -42,4 +42,61 @@ export async function getHealthRecordController(re, res) {
     res.json({success: true,
             data: records
         });
+}
+
+export async function getRecordController(re, res, next) {
+     // validation
+    const userId = re.userData.id;
+    const userExist = await findUserById(userId);
+    if (!userExist) {throw createError(400, 'invalid user id')}
+
+    const {id} = re.params;
+
+    try {
+         const data = await getUniqueHealthRecordBy('id', Number(id));
+
+         if (!data) { next(createError(400, 'record not exist'))}
+
+        res.json({success: true,
+            data
+        });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function updateRecordController(re, res) {
+    // validation
+    const userId = re.userData.id;
+    const userExist = await findUserById(userId);
+    if (!userExist) {throw createError(400, 'invalid user id')}
+
+    const {id} = re.params;
+
+    if (!re.body) { throw createError(400, 'body cant be empty')}
+    // console.log(re.body);
+
+    try {
+        const data = await updateHealthRecordsById(Number(id), re.body);
+        res.json({success: true,
+        data
+        });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function deleteRecordController(re, res) {
+    // validation
+    const userId = re.userData.id;
+    const userExist = await findUserById(userId);
+    if (!userExist) {throw createError(400, 'invalid user id')}
+
+    const {id} = re.params;
+
+    const result = await deleteHealthRecordById(Number(id));
+
+    res.json({success: true,
+       result
+    });
 }

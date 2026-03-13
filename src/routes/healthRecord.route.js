@@ -1,6 +1,6 @@
 import express from "express";
 import { authCheckDoctor, authCheckUser } from "../middlewares/authCheck.js";
-import { createHealthRecordController, getHealthRecordController } from "../controllers/healthRecord.controller.js";
+import { createHealthRecordController, deleteRecordController, getHealthRecordController, getRecordController, updateRecordController } from "../controllers/healthRecord.controller.js";
 
 const healthRouter = express.Router();
 
@@ -11,8 +11,8 @@ healthRouter.get('/', authCheckDoctor, getHealthRecordController);
 healthRouter.use(authCheckUser);
 
 healthRouter.post('/', createHealthRecordController);
-healthRouter.get('/:id', (re, res) => {}  );
-healthRouter.put('/:id', (re, res) => {}  );
-healthRouter.delete('/:id', (re, res) => {}  );
+healthRouter.get('/:id', getRecordController);
+healthRouter.put('/:id', updateRecordController);
+healthRouter.delete('/:id', deleteRecordController);
 
 export default healthRouter;

@@ -83,9 +83,23 @@ Content-Type: application/json
 }
 
 ### get all health record by doctor
-GET {{BASE_URL}}/health-records?type=weight&from=2026-03-14&to=2026-03-14
+GET {{BASE_URL}}/health-records?type=weight&from=2026-03-13&to=2026-03-14
 Authorization: Bearer {{DOCTOR_TOKEN}}
 
 ### get health record by id
 GET {{BASE_URL}}/health-records/2
+Authorization: Bearer {{USER_TOKEN}}
+
+### put health record by id
+PUT  {{BASE_URL}}/health-records/2
+Authorization: Bearer {{USER_TOKEN}}
+Content-Type: application/json
+
+{
+  "type": "height",
+  "value": "177cm"
+}
+
+### delete health record by id
+DELETE {{BASE_URL}}/health-records/2
 Authorization: Bearer {{USER_TOKEN}}

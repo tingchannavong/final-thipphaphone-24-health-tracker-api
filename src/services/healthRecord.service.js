@@ -34,7 +34,38 @@ export async function getHealthRecordsByDate(from, to) {
 
 export async function getHealthRecordsBy(field, value) {
     const filteredData= await prisma.healthRecord.findMany({
-        where: { field: value }
+        where: { [field]: value }
     });
     return filteredData
 }
+
+export async function getUniqueHealthRecordBy(field, value) {
+    const filteredData= await prisma.healthRecord.findUnique({
+        where: { [field]: value }
+    });
+    return filteredData
+}
+
+
+export async function updateHealthRecordsById(id, fields) {
+    // create data
+    let data = {};
+    
+    if (fields.type) {data.type = fields.type};
+    if (fields.value) {data.value = fields.value};
+
+    const filteredData= await prisma.healthRecord.update({
+        where: { id },
+        data: data
+    });
+    return filteredData
+}
+
+export async function deleteHealthRecordById(id) {
+
+    const result = await prisma.healthRecord.delete({
+        where: { id }
+    });
+    return result
+}
+
